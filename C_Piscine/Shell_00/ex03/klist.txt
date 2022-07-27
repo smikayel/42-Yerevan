@@ -1,0 +1,5 @@
+Credentials cache: API:F08979EC-8240-4275-9E11-A10D4408C44B
+        Principal: smikayel@42YEREVAN.AM
+
+  Issued                Expires               Principal
+Feb  7 20:11:45 2022  Feb  8 06:11:38 2022  krbtgt/42YEREVAN.AM@42YEREVAN.AM
