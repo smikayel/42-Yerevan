@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map.c                                          :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 12:03:40 by smikayel          #+#    #+#             */
-/*   Updated: 2022/07/30 20:19:45 by smikayel         ###   ########.fr       */
+/*   Created: 2022/08/01 18:43:55 by smikayel          #+#    #+#             */
+/*   Updated: 2022/08/01 20:07:55 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../pipex.h"
 
-char	*read_map(char *file_path)
+void	free_2d_char(char **arr)
 {
-	int		fd;
-	char	*map;
-	char	buff[2];
-	int		bytes;
+	int	i;
 
-	map = NULL;
-	fd = open(file_path, O_RDONLY);
-	if (fd == -1)
-		get_error(1);
-	while (1)
+	i = 0;
+	while (arr[i])
 	{
-		bytes = read(fd, buff, 1);
-		if (!bytes)
-			break ;
-		buff[bytes] = '\0';
-		if (!map)
-			map = ft_strdup(buff);
-		else
-			map = ft_strjoin(map, buff);
+		free(arr[i]);
+		i++;
 	}
-	return (map);
+	free(arr);
+}
+
+void	get_in_out(t_proces	*proc, char **argv)
+{
+	proc->input_file = get_input_file(argv[1]);
+	proc->output_file = get_output_file(argv[4]);
 }

@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map.c                                          :+:      :+:    :+:   */
+/*   end_utilc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 12:03:40 by smikayel          #+#    #+#             */
-/*   Updated: 2022/07/30 20:19:45 by smikayel         ###   ########.fr       */
+/*   Created: 2022/08/01 14:07:46 by smikayel          #+#    #+#             */
+/*   Updated: 2022/08/01 20:08:16 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../pipex.h"
 
-char	*read_map(char *file_path)
+void	close_pipe_to_ends(int *fd)
 {
-	int		fd;
-	char	*map;
-	char	buff[2];
-	int		bytes;
+	close(fd[0]);
+	close(fd[1]);
+}
 
-	map = NULL;
-	fd = open(file_path, O_RDONLY);
-	if (fd == -1)
-		get_error(1);
-	while (1)
-	{
-		bytes = read(fd, buff, 1);
-		if (!bytes)
-			break ;
-		buff[bytes] = '\0';
-		if (!map)
-			map = ft_strdup(buff);
-		else
-			map = ft_strjoin(map, buff);
-	}
-	return (map);
+void	wait_process(pid_t p1, pid_t p2)
+{
+	waitpid(p1, NULL, 0);
+	waitpid(p2, NULL, 0);
 }
