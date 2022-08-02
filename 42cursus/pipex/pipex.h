@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 17:47:18 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/01 20:07:13 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:07:18 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_terminal_command {
 typedef struct s_command {
 	t_terminal_command	*fir;
 	t_terminal_command	*sec;
+	char				**for_clear;
 }	t_command;
 
 typedef struct s_proces {
@@ -72,5 +73,6 @@ void		close_pipe_to_ends(int *fd);
 void		wait_process(pid_t p1, pid_t p2);
 void		free_2d_char(char **arr);
 void		get_in_out(t_proces	*proc, char **argv);
+void		free_structs(t_command *str, t_proces *proc);
 
 #endif

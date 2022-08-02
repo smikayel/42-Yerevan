@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:00:29 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/01 18:12:08 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:05:56 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ t_command	*env_cmd_check(char **env, char**argv)
 			commands->fir->command_name);
 	commands->sec->cmd_path = get_cmd_path(env_path,
 			commands->sec->command_name);
+	free_2d_char(env_path);
+	free(commands->sec->command_name);
 	cmd_valide_error(commands);
 	return (commands);
 }

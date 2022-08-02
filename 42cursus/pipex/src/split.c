@@ -3,78 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smikayel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 14:48:14 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/01 14:48:46 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:00:39 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-static size_t	getwordcount(char const *s, char c)
+static char	*sets(char const *s, size_t *n, char c)
 {
-	size_t	count;
 	size_t	i;
-	size_t	len;
+	size_t	j;
+	size_t	k;
+	char	*sm;
 
-	i = -1;
-	count = 1;
-	len = ft_strlen(s);
-	while (s[++i] && s[i] == c)
-		;
-	while (s[--len] && s[len] == c && i < len)
-		;
-	if (i == ft_strlen(s))
-		return (0);
-	while (s[i] && i < len)
-	{
-		if (s[i] == c && s[i - 1] != c)
-			count++;
+	j = 0;
+	i = 0;
+	k = *n;
+	while (i < ft_strlen(s) && s[i] != c)
 		i++;
-	}
-	return (count);
+	sm = malloc((i + 1) * sizeof(char));
+	if (!sm)
+		return (0);
+	while (*s != c && *s != '\0')
+		sm[j++] = *s++;
+	*n = i + k;
+	sm[j] = '\0';
+	return (sm);
 }
 
-static char	*fillword(const char *s, size_t startindex, size_t len)
+static size_t	nlen(char const *s, char c)
 {
-	char	*word;
-	size_t	i;
+	size_t	k;
+	size_t	j;
+	size_t	n;
 
-	i = -1;
-	word = malloc(sizeof(char) * (len + 1));
-	if (!word)
-		return (NULL);
-	while (++i < len)
-		word[i] = s[startindex + i];
-	word[i] = 0;
-	return (word);
+	n = 0;
+	k = 1;
+	j = 0;
+	while (s[j] != '\0')
+	{
+		if (s[j] != c && k > 0)
+		{
+			n++;
+			k = 0;
+		}
+		else if (s[j] == c)
+			k = 1;
+		j++;
+	}
+	return (n);
+}
+
+static void	clearfree(char **sm, size_t j)
+{
+	while (j >= 0)
+		free(sm[j--]);
+	free(sm);
 }
 
 char	**ft_split(char *s, char c)
 {
-	size_t	startindex;
-	size_t	endindex;
-	size_t	index;
-	size_t	wordcount;
-	char	**result;
+	char	**sm;
+	size_t	i;
+	size_t	j;
 
-	startindex = 0;
-	index = -1;
-	wordcount = getwordcount(s, c);
-	result = malloc(sizeof(char *) * (wordcount + 1));
-	if (!s || !result)
+	if (!s)
 		return (NULL);
-	while (++index < wordcount)
+	sm = malloc(sizeof(char *) * (nlen(s, c) + 1));
+	if (!sm)
+		return (NULL);
+	j = 0;
+	i = 0;
+	while (s[i] != '\0')
 	{
-		while (s[startindex] && s[startindex] == c)
-			startindex++;
-		endindex = startindex;
-		while (s[endindex] && s[endindex] != c)
-			endindex++;
-		result[index] = fillword(s, startindex, endindex - startindex);
-		startindex = endindex;
+		if (s[i++] != c)
+		{
+			sm[j] = sets(&s[--i], &i, c);
+			if (!sm[j++])
+			{
+				clearfree(sm, --j);
+				return (NULL);
+			}
+		}
 	}
-	result[index] = 0;
-	return (result);
+	sm[j] = 0;
+	return (sm);
 }

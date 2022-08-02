@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 18:52:06 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/01 20:24:31 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:05:48 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int	main(int ac, char **argv, char **env)
 		run_command_two(proc, commands->sec->cmd_path, argv[3], env);
 	close_pipe_to_ends(proc->pip_in_out);
 	wait_process(proc->child1, proc->child2);
+	free_structs(commands, proc);
 	return (0);
 }

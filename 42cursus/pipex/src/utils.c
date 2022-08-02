@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 18:45:53 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/01 18:33:05 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/08/02 14:53:28 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	**env_paths(int index, char **env)
 	path_equal = env[index];
 	path = ft_substr(path_equal, 5, ft_strlen(path_equal));
 	sp_env_path = ft_split(path, ':');
+	free(path);
 	return (sp_env_path);
 }
 

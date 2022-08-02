@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smikayel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 14:36:43 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/01 14:36:46 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:01:31 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,30 @@ size_t	ft_strlen(const char *str)
 
 char	*ft_substr(char *s, unsigned int start, size_t len)
 {
-	char	*sub_str;
 	size_t	i;
-	size_t	s_len;
+	size_t	j;
+	char	*sm;
+	size_t	l;
 
-	i = 0;
 	if (ft_strlen(s) < start)
 	{
-		sub_str = malloc(sizeof(char));
-		sub_str[0] = '\0';
-		return (sub_str);
+		sm = malloc(sizeof(char));
+		sm[0] = '\0';
+		return (sm);
 	}
-	s_len = ft_strlen(s + start);
-	if (s_len < len)
-		len = s_len;
-	sub_str = (char *)malloc(len + 1);
-	if (!sub_str)
+	l = ft_strlen(s + start);
+	if (l < len)
+		len = l;
+	sm = malloc(len + 1);
+	if (!sm)
 		return (NULL);
-	while (i < len)
-	{
-		sub_str[i] = s[start];
-		start++;
-		i++;
-	}
-	sub_str[i] = '\0';
-	return (sub_str);
+	i = -1;
+	j = 0;
+	while (s[++i])
+		if (start <= i && j < len)
+			sm[j++] = s[i];
+	sm[j] = 0;
+	return (sm);
 }
 
 char	*ft_strdup(char *src)
