@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 17:47:18 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/02 15:07:18 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:17:45 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
+# include "libftprintf.h"
 
 # ifndef ENV_PATH_NAME
 #  define ENV_PATH_NAME "PATH"

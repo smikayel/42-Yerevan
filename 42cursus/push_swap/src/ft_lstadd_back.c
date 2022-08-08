@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 18:43:55 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/02 15:22:48 by smikayel         ###   ########.fr       */
+/*   Created: 2022/08/08 12:23:12 by smikayel          #+#    #+#             */
+/*   Updated: 2022/08/08 12:23:13 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "push_swap.h"
 
-void	free_2d_char(char **arr)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int	i;
+	t_list	*iter;
 
-	i = 0;
-	while (arr[i])
+	if (lst == NULL || new == NULL)
+		return ;
+	if (*lst == NULL)
 	{
-		free(arr[i]);
-		i++;
+		*lst = new;
+		return ;
 	}
-	free(arr);
-}
-
-void	get_in_out(t_proces	*proc, char **argv)
-{
-	if (!*argv[2] || !*argv[3])
-	{
-		ft_printf("%s", "Input error!");
-		exit(0);
-	}
-	proc->input_file = get_input_file(argv[1]);
-	proc->output_file = get_output_file(argv[4]);
+	iter = *lst;
+	while (iter -> next != NULL)
+		iter = iter -> next;
+	iter -> next = new;
 }

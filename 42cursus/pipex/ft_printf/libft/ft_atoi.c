@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 18:43:55 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/02 15:22:48 by smikayel         ###   ########.fr       */
+/*   Created: 2022/03/16 17:43:32 by vasargsy          #+#    #+#             */
+/*   Updated: 2022/07/26 17:32:47 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "libft.h"
 
-void	free_2d_char(char **arr)
+int	ft_atoiasd(const char *str)
 {
-	int	i;
+	int	a;
+	int	b;
 
-	i = 0;
-	while (arr[i])
+	a = 0;
+	b = 1;
+	while (*str == 32 || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		free(arr[i]);
-		i++;
+		if (*str == '-')
+		{
+			b *= -1;
+		}
+		str++;
 	}
-	free(arr);
-}
-
-void	get_in_out(t_proces	*proc, char **argv)
-{
-	if (!*argv[2] || !*argv[3])
+	while (*str >= '0' && *str <= '9')
 	{
-		ft_printf("%s", "Input error!");
-		exit(0);
+		a = a * 10 + *str - '0';
+		str++;
 	}
-	proc->input_file = get_input_file(argv[1]);
-	proc->output_file = get_output_file(argv[4]);
+	return (a * b);
 }

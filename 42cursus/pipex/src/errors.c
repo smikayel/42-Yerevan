@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 14:34:23 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/01 14:36:11 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:21:43 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 void	huk_error(int error_number)
 {
 	if (error_number == 1)
-		printf("Arguments count not correct!!!");
+		ft_printf("Arguments count not correct!!!");
 	else if (error_number == 2)
-		printf("Somthing went wrong with input file!!!");
+		ft_printf("Somthing went wrong with input file!!!");
 	else if (error_number == 3)
-		printf("env. path not found, or somthing went wrong!!!");
+		ft_printf("env. path not found, or somthing went wrong!!!");
 	else if (error_number == 4)
-		printf("Commands not valide or not found in path!!!");
+		ft_printf("Commands not valide or not found in path!!!");
 	else if (error_number == 5)
-		printf("Error with memory alocation!");
+		ft_printf("Error with memory alocation!");
 	else if (error_number == 6)
-		printf("Somthing went wrong with output file!!!");
+		ft_printf("Somthing went wrong with output file!!!");
 	else if (error_number == 7)
-		printf("Pipe error!!!");
+		ft_printf("Pipe error!!!");
 	exit(0);
 }
 

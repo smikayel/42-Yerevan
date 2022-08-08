@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:00:29 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/02 15:05:56 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:22:29 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,14 @@ void	cmd_valide_error(t_command *commands)
 {
 	if (!commands->fir->cmd_path)
 	{
-		printf("Command not valide: %s", commands->fir->command_name);
+		ft_printf("Command not valide or not in path: %s",
+			commands->fir->command_name);
 		exit(0);
 	}
 	else if (!commands->sec->cmd_path)
 	{
-		printf("Command not valide: %s", commands->sec->command_name);
+		ft_printf("Command not valide or not in path: %s",
+			commands->sec->command_name);
 		exit(0);
 	}
 }
