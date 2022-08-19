@@ -1,0 +1,5 @@
+OUT = philosophers
+
+
+$(NAME) :
+	
