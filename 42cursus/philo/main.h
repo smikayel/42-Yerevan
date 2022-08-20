@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 16:08:47 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/19 18:29:34 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/08/20 20:34:40 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <limits.h>
 # include <pthread.h>
 # include <sys/time.h>
-
+ 
 typedef struct s_philo
 {
 	int				number_of_philosophers;
@@ -37,6 +37,8 @@ typedef struct s_current
 	t_philo	*philo;
 	int		philo_number;
 	int		time_not_eating;
+	int		state;
+	int		think_state;
 }	t_current;
 
 void		error(int error_code);
@@ -48,11 +50,13 @@ pthread_t	*born_philo(t_philo	*philo);
 void		*life(void *philo);
 int			*get_forks(int forks_count);
 int			get_forks_current_philo(void *philo, int philo_number);
-int			take_fork_eat(void *philo, int philo_number);
+
+
+int			take_fork_eat(void *philo, int philo_number, int state);
 int			eat(void *philos, int philo_number, t_current	*curr);
 void		sleeping(void *philos, int philo_number, t_current *curr);
 int			put_forks_current_philo(void *philo, int philo_number);
-void		thinking(void *philos, int philo_number);
+void		thinking(void *philos, int philo_number, t_current *curr);
 int			is_any_died(t_current	*curr);
 
 #endif

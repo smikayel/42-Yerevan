@@ -6,7 +6,7 @@
 /*   By: smikayel <smikayel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 14:53:17 by smikayel          #+#    #+#             */
-/*   Updated: 2022/08/19 18:31:04 by smikayel         ###   ########.fr       */
+/*   Updated: 2022/08/20 20:38:34 by smikayel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,20 @@ int	*init_is_dead(int philo_count)
 
 	philos_is_dead = malloc(sizeof(int) * philo_count);
 	i = 0;
-	while (philos_is_dead[i])
+	while (i < philo_count)
 	{
 		philos_is_dead[i] = 0;
 		i++;
 	}
 	return (philos_is_dead);
+}
+
+void	other_life_cicles(t_current *curr)
+{
+	if (curr->state == 2)
+		sleeping(curr->philo, curr->philo_number, curr);
+	if (curr->state == 1)
+		thinking(curr->philo, curr->philo_number, curr);
 }
 
 void	*life(void *cur_philo)
@@ -35,15 +43,61 @@ void	*life(void *cur_philo)
 
 	curr = (t_current *)cur_philo;
 	philo = curr->philo;
-	eat_count = curr->philo->number_of_times_each_philosopher_must_eat || 1;
-	//need to check
-	// while (eat_count && !is_any_died(curr))
-	// {
+	eat_count = curr->philo->number_of_times_each_philosopher_must_eat;
+
+	// printf("======= philo [%d]state[%d]========\n", curr->philo_number, take_fork_eat(curr->philo, curr->philo_number, curr->state));
+	while (1)
+	{
+		pthread_mutex_lock(philo->mutex);
+		if(take_fork_eat(curr->philo, curr->philo_number, curr->state) == 1)
+		{
+			pthread_mutex_unlock(philo->mutex);
+			eat(curr->philo, curr->philo_number, curr);
+		}
+		else
+		{
+			pthread_mutex_unlock(philo->mutex);
+			other_life_cicles(curr);
+		}
+	}
+
+
+
+
+	/*
+	while (eat_count && !is_any_died(curr))
+	{
+		pthread_mutex_lock(philo->mutex);
+		if (!take_fork_eat(curr->philo, curr->philo_number, curr->state))
+		{
+			pthread_mutex_unlock(philo->mutex);*/
+			// eat_count -= eat(curr->philo, curr->philo_number, curr);
+			// printf(" ");
+		// }
+		// else
+		// {
+			// printf("%d << number\n", curr->state);
+			// pthread_mutex_unlock(philo->mutex);
+			// other_life_cicles(curr);
+		// }
+	// }
+
+	//state 1 first time (eating)
+	//state 1 is eating
+	//state 2 is sleaping
+	//state 3 is thinking
+	
+
+
+	// //need to check
+	// // while (eat_count && !is_any_died(curr))
+	// // {
 	// 	pthread_mutex_lock(philo->mutex);
+	// 	printf("%d<<\n", curr->philo_number);
 	// 	if (!take_fork_eat(curr->philo, curr->philo_number))
 	// 		eat_count -= eat(curr->philo, curr->philo_number, curr);
-	// 	else
-	// 	{
+	// // 	else
+	// // 	{
 	// 		pthread_mutex_unlock(philo->mutex);
 	// 		sleeping(curr->philo, curr->philo_number, curr);
 	// 		thinking(curr->philo, curr->philo_number);
@@ -59,8 +113,9 @@ void	create_thred(pthread_t	*threds, int thred_num, t_philo *philosophers)
 	philo = malloc(sizeof(t_current));
 	if (!philo)
 		error(1);
-	philo->philo_number = thred_num;
+	philo->philo_number = thred_num + 1;
 	philo->philo = philosophers;
+	philo->state = 1;
 	if (pthread_create(&threds[thred_num], NULL, life, (void *)philo) < 0)
 		error(4);
 }
