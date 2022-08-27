@@ -61,7 +61,7 @@ It must take 4 arguments:
 $> < file1 cmd1 | cmd2 > file2
 
 
-**III.1 Examples**
+** Examples**
 
 $> ./pipex infile "ls -l" "wc -l" outfile
 
@@ -71,7 +71,7 @@ $> ./pipex infile "grep a1" "wc -w" outfile
 
 Should behave like: < infile grep a1 | wc -w > outfile
 
-**III.2 Requirements**
+** Requirements**
 
 Your project must comply with the following rules:
 
