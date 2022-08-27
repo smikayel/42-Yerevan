@@ -57,8 +57,9 @@ Deepthought’s grading, the evaluation will stop.
 |**Description**|Write your own library: a collection of functions that will be a useful tool for your cursus.|
 
 Here are the requirements:
-    You must write your own function implementing the following original ones. They do
-  not require any external functions:
+
+You must write your own function implementing the following original ones. They do
+not require any external functions:
   • isalpha
   • isdigit
   • isalnum
@@ -80,7 +81,9 @@ Here are the requirements:
   • memcmp
   • strnstr
   • atoi
-  In order to implement the two following functions, you will use malloc():
+ 
+In order to implement the two following functions, you will use malloc():
+  
   • calloc
   • strdup
 
