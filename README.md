@@ -10,7 +10,7 @@ This repository contains coding developed at [42Yerevan's](https://www.42sp.org.
 	approved in its selection process. The so-called "C Piscine", a 26-day C programming bootcamp,
 	is the last stage in the selection process for becoming a "cadet" (42's student).
 
-[![Photo of a 42Yerevan's lab](42Yerevan.jpg)](https://www.42sp.org.br/)
+[![Photo of a 42Yerevan's lab]([42Yerevan.jpg](https://lh3.google.com/u/0/d/1Obg8y45CPJfWeflRE6YDDzOh9TIlpEJu=w4096-h1760-iv1))](https://www.42sp.org.br/)
 
 ## Skills developed at C Piscine
 
